@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/30 12:58:14 by ambouren         ###   ########.fr        #
+#    Updated: 2022/08/03 16:58:36 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ red		=	\033[31m
 CC      =	gcc
 
 CFLAGS  =	-Wall -Wextra -Werror -g
-IFLAGS	=	-I includes/ -I libs/libft/includes/ -I libs/libmlx
-LDFLAGS	=	-L libs/ -lft -lmlx -lm
+IFLAGS	=	-I includes/ -I libs/libft/includes/ -I libs/libmlx -I libs/libftprintf/includes
+LDFLAGS	=	-L libs/ -lft -lmlx -lXext -lX11 -lftprintf -lm
 EXEC	=	so_long
 
 INC_PATH=	includes/
@@ -32,8 +32,17 @@ SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 vpath %.a $(LIB_PATH)
 LIB		=	libft.a \
-			libmlx.a
-SRC		=	main.c 
+			libmlx.a \
+			libftprintf.a
+SRC		=	main.c \
+			parsing.c \
+			game.c \
+			player.c \
+			monster.c \
+			map.c \
+			error.c \
+			direction.c \
+			graphic.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 BON_OBJ	=	$(addprefix $(OBJ_PATH), $(BONUS:.c=.o))
@@ -62,7 +71,7 @@ clean	:
 	rm -rf $(OBJ_PATH)
 	rm -rf $(DEP_PATH)
 
-fclean	:	clean $(foreach lib, $(LIB),  $(LIB_PATH)$(lib:.a=)_fclean)
+fclean	:	clean $(foreach lib, $(LIB), $(LIB_PATH)$(lib:.a=)_fclean)
 	rm -rf $(EXEC)
 	rm -rf $(addprefix $(LIB_PATH), $(LIB))
 	

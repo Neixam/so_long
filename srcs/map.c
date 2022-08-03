@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 08:35:31 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 14:06:53 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "map.h"
 
-char	*ft_strchr(const char *s, int c)
+t_map	init_map(void)
 {
-	int	i;
+	t_map	ret;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+	ret.map = 0;
+	ret.max_x = 0;
+	ret.max_y = 0;
+	return (ret);
+}
+
+int	is_free(t_map map, int x, int y)
+{
+	if (map.map[y][x] == WALL || map.map[y][x] == MONSTER)
+		return (0);
+	if (map.map[y][x] == NOTHING)
+		return (404);
+	return (map.map[y][x]);
 }

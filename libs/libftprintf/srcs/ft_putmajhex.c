@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putmajhex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/30 15:34:32 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:34:37 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putmajhex_aux(unsigned int n)
 {
-	int	i;
+	int	ret;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+	if (n < 16)
+	{
+		if (n >= 10)
+			n = 'A' + n % 10;
+		else
+			n += '0';
+		return (ft_putchar(&n));
+	}
+	ret = ft_putmajhex_aux(n / 16);
+	return (ret + ft_putmajhex_aux(n % 16));
+}
+
+int	ft_putmajhex(void *X)
+{
+	int	n;
+
+	n = *((int *)X);
+	return (ft_putmajhex_aux(n));
 }

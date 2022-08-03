@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 15:39:50 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/07 14:48:06 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf_bonus.h"
+#include <unistd.h>
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putalign(t_flag flag)
 {
-	int	i;
+	char	c;
+	int		ret;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+	c = ' ';
+	if (ZERO & flag.flag && !(MINUS & flag.flag))
+		c = '0';
+	ret = 0;
+	while (flag.size-- > 0)
+		ret += write(1, &c, 1);
+	return (ret);
+}
+
+int	ft_len(unsigned long n, int base)
+{
+	int	len;
+
+	len = 1;
+	while (n / base)
+	{
+		n /= base;
+		len++;
+	}
+	return (len);
 }

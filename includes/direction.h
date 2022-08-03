@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   direction.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 08:39:02 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 12:43:28 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DIRECTION_H
+# define DIRECTION_H
 
-char	*ft_strchr(const char *s, int c)
+typedef enum e_direction
 {
-	int	i;
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}	t_direction;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
-}
+void	move(t_direction d, int *x, int *y);
+
+void	rollback(t_direction d, int *x, int *y);
+
+#endif

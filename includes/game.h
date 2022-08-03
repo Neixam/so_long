@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 08:36:02 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 17:16:03 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GAME_H
+# define GAME_H
+# include "map.h"
+# include "player.h"
+# include "monster.h"
+# include "direction.h"
 
-char	*ft_strchr(const char *s, int c)
+typedef struct s_game
 {
-	int	i;
+	t_map		map;
+	t_player	plyr;
+	t_monsters	mnstr;
+	int			items;
+	int			end;
+	int			moves;
+}		t_game;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
-}
+t_game	init_game(void);
+
+void	move_player(t_game *game, t_direction drct);
+
+void	state_game(t_game *game);
+
+void	destroy_game(t_game *game);
+
+#endif

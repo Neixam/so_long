@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/29 16:29:38 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:12:10 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putnbr_aux(long n)
 {
-	int	i;
+	int		ret;
+	char	c;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+	ret = 0;
+	if (n < 0)
+	{
+		c = '-';
+		ret += ft_putchar(&c);
+		return (ret + ft_putnbr_aux(-n));
+	}
+	if (n < 10)
+	{
+		c = n + '0';
+		return (ret + ft_putchar(&c));
+	}
+	ret += ft_putnbr_aux(n / 10);
+	return (ret + ft_putnbr_aux(n % 10));
+}
+
+int	ft_putnbr(void *n)
+{
+	int	nb;
+
+	nb = *((int *)n);
+	return (ft_putnbr_aux(nb));
 }

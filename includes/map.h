@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 08:38:19 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 11:11:38 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MAP_H
+# define MAP_H
 
-char	*ft_strchr(const char *s, int c)
+typedef enum e_case
 {
-	int	i;
+	NOTHING,
+	WALL,
+	MONSTER,
+	PLAYER,
+	ITEM,
+	EXIT
+}	t_case;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
-}
+typedef struct s_map
+{
+	t_case	**map;
+	int		max_x;
+	int		max_y;
+}			t_map;
+
+int		is_free(t_map map, int x, int y);
+
+t_map	init_map(void);
+
+#endif

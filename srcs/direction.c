@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 12:40:16 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 12:44:36 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "direction.h"
 
-char	*ft_strchr(const char *s, int c)
+void	move(t_direction d, int *x, int *y)
 {
-	int	i;
+	if (d == UP)
+		*y -= 1;
+	if (d == DOWN)
+		*y += 1;
+	if (d == LEFT)
+		*x -= 1;
+	if (d == RIGHT)
+		*x += 1;
+}
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+void	rollback(t_direction d, int *x, int *y)
+{
+	if (d == UP)
+		*y += 1;
+	if (d == DOWN)
+		*y -= 1;
+	if (d == LEFT)
+		*x += 1;
+	if (d == RIGHT)
+		*x -= 1;
 }

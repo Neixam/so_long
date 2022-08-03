@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   monster.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/03 11:40:35 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/03 13:51:57 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MONSTER_H
+# define MONSTER_H
+# include "direction.h"
+# include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+typedef struct s_monster
 {
-	int	i;
+	t_direction	drctn;
+	int	x;
+	int	y;
+}				t_monster;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
-}
+typedef t_list	*t_monsters;
+
+t_monster		*init_monster(int x, int y);
+
+t_monster		*get(t_monsters ms);
+
+int	is_attack(t_monsters ms, int x, int y);
+
+#endif

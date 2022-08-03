@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:40:07 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 11:49:06 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 12:59:00 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/04 13:03:11 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putuns_aux(unsigned int n)
 {
-	int	i;
+	int	ret;
 
-	if (c == 0)
-		return (&((char *)s)[ft_strlen(s)]);
-	i = -1;
-	while (((char *)s)[++i])
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return (0);
+	if (n < 10)
+	{
+		n += '0';
+		return (ft_putchar(&n));
+	}
+	ret = ft_putuns_aux(n / 10);
+	return (ret + ft_putuns_aux(n % 10));
+}
+
+int	ft_putuns(void *u)
+{
+	unsigned int	n;
+
+	n = *((unsigned int *)u);
+	return (ft_putuns_aux(n));
 }
