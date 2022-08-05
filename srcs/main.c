@@ -6,12 +6,11 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:56:52 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 11:14:14 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 15:01:12 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "ft_printf.h"
 #include "so_long.h"
 
 int	main(int ac, char **av)
