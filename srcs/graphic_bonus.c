@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic.c                                          :+:      :+:    :+:   */
+/*   graphic_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 14:39:57 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:13:00 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/05 14:11:57 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/05 14:12:22 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,29 @@ void	destroy_graphic(t_graphic *graph)
 
 void	put_player(t_graphic *graph, t_player p)
 {
+	static int	frame = 0;
+
+	if (frame == 5)
+		frame = 0;
 	mlx_put_image_to_window(graph->mlx, graph->win,
-		graph->anim.idle_player[p.drctn][0].img, p.x * 35, p.y * 35);
+		graph->anim.idle_player[p.drctn][frame++].img, p.x * 35, p.y * 35);
 }
 
 void	put_monster(t_graphic *graph, t_monsters ms)
 {
+	static int	frame = 0;
 	t_monster	*m;
 
+	if (frame == 5)
+		frame = 0;
 	while (ms)
 	{
 		m = (t_monster *)ms->content;
 		mlx_put_image_to_window(graph->mlx, graph->win,
-			graph->anim.idle_monster[0].img, m->x * 35, m->y * 35);
+			graph->anim.idle_monster[frame].img, m->x * 35, m->y * 35);
 		ms = ms->next;
 	}
+	frame++;
 }
 
 void	do_attack(t_graphic *graph, t_monsters ms, t_player p)

@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/08/05 12:13:27 by ambouren         ###   ########.fr        #
+#    Updated: 2022/08/05 14:22:49 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,22 @@ SRC		=	main.c \
 			anim.c \
 			alloc_anim.c \
 			pickup.c
+BONUS	=	main.c \
+			parsing_bonus.c \
+			game.c \
+			player.c \
+			monster.c \
+			map.c \
+			error.c \
+			direction.c \
+			graphic_bonus.c \
+			so_long_bonus.c \
+			anim.c \
+			alloc_anim.c \
+			pickup.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
+BON_OBJ	=	$(addprefix $(OBJ_PATH), $(BONUS:.c=.o))
 
 #	Compilation
 all		:	$(EXEC)
@@ -80,4 +94,7 @@ fclean	:	clean $(foreach lib, $(LIB), $(LIB_PATH)$(lib:.a=)_fclean)
 	
 re		:	fclean all
 
-.PHONY	:	all clean fclean re
+bonus	:	$(addprefix $(LIB_PATH), $(LIB)) $(BON_OBJ)
+	$(CC) $(CFLAGS) -o $(EXEC) $(BON_OBJ) $(LDFLAGS)
+
+.PHONY	:	all clean fclean re bonus

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 08:31:41 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:17:46 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/05 14:09:50 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/05 14:10:08 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "direction.h"
-#include "ft_printf.h"
 #include <mlx.h>
+#include <unistd.h>
 
 void	put_game(t_data *data)
 {
@@ -41,18 +41,22 @@ int	main_loop(void *hand)
 	t_data	*data;
 	int		ret;
 
+	usleep(FRAME);
 	data = (t_data *)hand;
 	ret = state_game(&data->game);
 	if (data->game.modified)
 	{
 		put_game(data);
-		ft_printf("moves : %d\n", data->game.moves);
+		put_hud(data);
 	}
 	if (ret == 1)
 		mlx_loop_end(data->graph.mlx);
 	put_player(&data->graph, data->game.plyr);
+	put_monster(&data->graph, data->game.mnstr);
 	if (ret == 0)
-		mlx_loop_end(data->graph.mlx);
+		do_attack(&data->graph, data->game.mnstr, data->game.plyr);
+	if (ret == 3 || data->graph.freeze & (1 << 3))
+		do_pickup(&data->graph, data->game.plyr);
 	return (0);
 }
 

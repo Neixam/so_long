@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 13:01:00 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:15:43 by ambouren         ###   ########.fr       */
+/*   Created: 2022/08/05 14:14:32 by ambouren          #+#    #+#             */
+/*   Updated: 2022/08/05 14:14:43 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	set_case(char c, t_game *game, int i, int j)
 {
 	int	ret;
 
-	ret = ft_strichr("011PCE", c);
+	ret = ft_strichr("01MPCE", c);
 	if (ret == -1)
 		return (0);
 	if (ret == ITEM)
