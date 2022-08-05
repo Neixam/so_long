@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 18:10:00 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/29 13:49:14 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:56:32 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_recup_line(char **line, char *buffer)
 	return (ft_decal_buff(buffer, j));
 }
 
-char	*ft_panic(char *line)
+char	*ft_panoic(char *line)
 {
 	if (line)
 		free(line);

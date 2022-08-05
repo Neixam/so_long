@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 12:45:03 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/29 13:49:30 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:57:11 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 	{
 		size = read(fd, buffer, BUFFER_SIZE);
 		if (size == -1)
-			return (ft_panic(line));
+			return (ft_panoic(line));
 		buffer[size] = 0;
 		if (!size || ft_recup_line(&line, buffer) || !line)
 			break ;

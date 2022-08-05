@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 08:36:02 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 17:16:03 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:51:05 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ typedef struct s_game
 	int			items;
 	int			end;
 	int			moves;
+	int			modified;
 }		t_game;
 
 t_game	init_game(void);
 
 void	move_player(t_game *game, t_direction drct);
 
-void	state_game(t_game *game);
+int		state_game(t_game *game);
 
 void	destroy_game(t_game *game);
 

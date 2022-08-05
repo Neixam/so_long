@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:01:00 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 14:05:23 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:22:40 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ int	last_verif(t_map *map)
 		while (++j < map->max_x)
 		{
 			if ((i == 0 || j == 0 || i == map->max_y - 1
-				|| j == map->max_x - 1) && map->map[i][j] != WALL)
-				return (ft_error("Missing wall"));
+					|| j == map->max_x - 1) && map->map[i][j] != WALL)
+				return (ft_panic(map, "Missing wall", map->max_y - 1));
 			if (map->map[i][j] > MONSTER)
 				verif |= (1 << (map->map[i][j] - PLAYER));
 		}
 	}
 	if (verif != 7)
-		return (ft_error("Need 1 item, 1 exit and 1 initial pos"));
+		return (ft_panic(map, "Need 1 item, 1 exit and 1 initial pos",
+				map->max_y - 1));
 	return (0);
 }
 
-int create_map(t_list *file, t_map *map, t_game *game)
+int	create_map(t_list *file, t_map *map, t_game *game)
 {
 	char	*line;
 	int		i;
@@ -81,7 +82,7 @@ int create_map(t_list *file, t_map *map, t_game *game)
 		j = 0;
 		while (*line && *line != '\n')
 			if (!set_case(*(line++), game, i, j++))
-				return (ft_error("Bad character"));
+				return (ft_panic(map, "Bad character", i));
 		file = file->next;
 		i++;
 	}
@@ -100,8 +101,9 @@ int	reading_file(int fd, t_game *game)
 	file = NULL;
 	while (line)
 	{
-		if (ft_strlen(line) - 1 != ((unsigned long)game->map.max_x))
-			return (ft_error("Map isn't rectangular"));
+		if (line[ft_strlen(line) - 1] == '\n'
+			&& ft_strlen(line) - 1 != ((unsigned long)game->map.max_x))
+			return (ft_panic_lst(&file, "Map isn't rectangular", line));
 		game->map.max_y++;
 		ft_lstadd_back(&file, ft_lstnew(line));
 		line = get_next_line(fd);

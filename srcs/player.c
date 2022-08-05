@@ -6,13 +6,13 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 08:35:19 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 12:38:05 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:21:17 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-t_player init_player(void)
+t_player	init_player(void)
 {
 	t_player	ret;
 

@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/08/03 16:58:36 by ambouren         ###   ########.fr        #
+#    Updated: 2022/08/05 12:13:27 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,13 @@ SRC		=	main.c \
 			map.c \
 			error.c \
 			direction.c \
-			graphic.c
+			graphic.c \
+			so_long.c \
+			anim.c \
+			alloc_anim.c \
+			pickup.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
-BON_OBJ	=	$(addprefix $(OBJ_PATH), $(BONUS:.c=.o))
 
 #	Compilation
 all		:	$(EXEC)
@@ -75,7 +78,6 @@ fclean	:	clean $(foreach lib, $(LIB), $(LIB_PATH)$(lib:.a=)_fclean)
 	rm -rf $(EXEC)
 	rm -rf $(addprefix $(LIB_PATH), $(LIB))
 	
-
 re		:	fclean all
 
-.PHONY	:	all clean fclean re bonus
+.PHONY	:	all clean fclean re

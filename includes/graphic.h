@@ -6,27 +6,21 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:40:10 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 17:39:31 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:48:56 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHIC_H
 # define GRAPHIC_H
-# include "game.h"
-# define PPLAYER "ressources/assets/character/down-idle-1.xpm"
 # define PWALL "ressources/assets/map/wall.xpm"
 # define PGROUND "ressources/assets/map/ground.xpm"
 # define PO_EXIT "ressources/assets/map/open_exit.xpm"
 # define PC_EXIT "ressources/assets/map/close_exit.xpm"
 # define PITEM "ressources/assets/map/item.xpm"
-# define PMONSTER ""
-
-typedef struct s_img
-{
-	void	*img;
-	int		width;
-	int		height;
-}			t_img;
+# include "player.h"
+# include "monster.h"
+# include "anim.h"
+# include "game.h"
 
 typedef struct s_graphic
 {
@@ -34,17 +28,29 @@ typedef struct s_graphic
 	void	*win;
 	int		size_x;
 	int		size_y;
+	int		freeze;
 	t_img	wall;
 	t_img	o_exit;
 	t_img	c_exit;
-	t_img	player;
-	t_img	monster;
+	t_anim	anim;
 	t_img	item;
 	t_img	ground;
 }	t_graphic;
 
 int		init_graph(t_graphic *graph);
 
-void	start_game(t_game *game, t_graphic *graph);
+int		init_graph2(t_graphic *graph);
+
+void	destroy_graphic(t_graphic *graph);
+
+void	put_player(t_graphic *graph, t_player p);
+
+void	put_monster(t_graphic *graph, t_monsters ms);
+
+void	do_attack(t_graphic *graph, t_monsters ms, t_player p);
+
+void	do_pickup(t_graphic *graph, t_player p);
+
+void	put_case(t_graphic *graph, t_game *game, int x, int y);
 
 #endif

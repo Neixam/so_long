@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:40:08 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/03 13:51:37 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:31:20 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,23 @@ t_monster	*get(t_monsters ms)
 	return ((t_monster *)ms->content);
 }
 
+t_direction	where_attack(t_monster m, t_player p)
+{
+	if (m.x - p.x == 0)
+	{
+		if (m.y - p.y == 1)
+			return (DOWN);
+		return (UP);
+	}
+	if (m.x - p.x == 1)
+		return (LEFT);
+	return (RIGHT);
+}
+
 int	is_attack(t_monsters ms, int x, int y)
 {
-	int xdiff;
-	int ydiff;
+	int	xdiff;
+	int	ydiff;
 
 	if (get(ms)->x < x)
 		xdiff = x - get(ms)->x;

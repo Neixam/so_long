@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:30:30 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/27 18:39:47 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:55:07 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_count_word(char const *s, char c)
 	return (len);
 }
 
-static char	**ft_panic(char **tab, int len)
+static char	**ft_panouc(char **tab, int len)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 		{
 			ret[i_word] = ft_recup_word((char **)&s, c);
 			if (!ret[i_word++])
-				return (ft_panic(ret, i_word - 1));
+				return (ft_panouc(ret, i_word - 1));
 		}
 		if (*s)
 			s++;
