@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:09:50 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:10:08 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:10:44 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	main_loop(void *hand)
 		put_game(data);
 		put_hud(data);
 	}
-	if (ret == 1)
-		mlx_loop_end(data->graph.mlx);
 	put_player(&data->graph, data->game.plyr);
 	put_monster(&data->graph, data->game.mnstr);
+	if (ret == 1)
+		do_end(&data->graph, "VICTORY");
 	if (ret == 0)
 		do_attack(&data->graph, data->game.mnstr, data->game.plyr);
 	if (ret == 3 || data->graph.freeze & (1 << 3))

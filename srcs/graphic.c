@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:39:57 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:13:00 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/10 10:44:34 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,51 @@
 #include "map.h"
 #include "libft.h"
 #include "direction.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "error.h"
 
 int	init_graph(t_graphic *graph)
 {
 	graph->mlx = mlx_init();
 	graph->freeze = 0;
 	if (!graph->mlx)
-		return (1);
+		return (ft_ferror("mlx_init"));
 	graph->wall.img = mlx_xpm_file_to_image(graph->mlx, PWALL,
 			&graph->wall.width, &graph->wall.height);
 	if (!graph->wall.img)
-		return (1);
+		return (ft_ferror("mlx_xpm_file_to_image for wall"));
 	graph->o_exit.img = mlx_xpm_file_to_image(graph->mlx, PO_EXIT,
 			&graph->o_exit.width, &graph->o_exit.height);
 	if (!graph->o_exit.img)
-		return (1);
+		return (ft_ferror("mlx_xpm_file_to_image for o_exit"));
 	graph->c_exit.img = mlx_xpm_file_to_image(graph->mlx, PC_EXIT,
 			&graph->c_exit.width, &graph->c_exit.height);
 	if (!graph->c_exit.img)
-		return (1);
+		return (ft_ferror("mlx_xpm_file_to_image for c_exit"));
 	return (init_graph2(graph));
 }
 
 void	destroy_graphic(t_graphic *graph)
 {
-	mlx_destroy_image(graph->mlx, graph->wall.img);
-	mlx_destroy_image(graph->mlx, graph->o_exit.img);
-	mlx_destroy_image(graph->mlx, graph->c_exit.img);
-	mlx_destroy_image(graph->mlx, graph->item.img);
-	mlx_destroy_image(graph->mlx, graph->ground.img);
-	destroy_anim(&graph->anim, graph->mlx);
-	mlx_destroy_window(graph->mlx, graph->win);
-	mlx_destroy_display(graph->mlx);
-	free(graph->mlx);
+	if (graph->wall.img)
+		mlx_destroy_image(graph->mlx, graph->wall.img);
+	if (graph->o_exit.img)
+		mlx_destroy_image(graph->mlx, graph->o_exit.img);
+	if (graph->c_exit.img)
+		mlx_destroy_image(graph->mlx, graph->c_exit.img);
+	if (graph->item.img)
+		mlx_destroy_image(graph->mlx, graph->item.img);
+	if (graph->ground.img)
+		mlx_destroy_image(graph->mlx, graph->ground.img);
+	if (graph->anim.attack_monster)
+		destroy_anim(&graph->anim, graph->mlx);
+	if (graph->win)
+		mlx_destroy_window(graph->mlx, graph->win);
+	if (graph->mlx)
+	{
+		mlx_destroy_display(graph->mlx);
+		free(graph->mlx);
+	}
 }
 
 void	put_player(t_graphic *graph, t_player p)

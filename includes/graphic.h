@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:40:10 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 13:48:56 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/09 10:55:30 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ void	do_attack(t_graphic *graph, t_monsters ms, t_player p);
 void	do_pickup(t_graphic *graph, t_player p);
 
 void	put_case(t_graphic *graph, t_game *game, int x, int y);
+
+void	do_end(t_graphic *graph, char *end_msg);
 
 #endif

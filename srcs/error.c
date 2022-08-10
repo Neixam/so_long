@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 10:52:56 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 12:59:40 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/10 10:37:52 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_error(char *cause)
 
 int	ft_ferror(char *cause)
 {
+	ft_printf("Error\n");
 	perror(cause);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 10:22:57 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 13:44:59 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/10 11:22:40 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include <mlx.h>
 #include <stdlib.h>
 #include "libft.h"
+#include <unistd.h>
+#include "error.h"
+
+void	do_end(t_graphic *graph, char *end_msg)
+{
+	static int	frame = 0;
+
+	graph->freeze = 1;
+	mlx_clear_window(graph->mlx, graph->win);
+	mlx_string_put(graph->mlx, graph->win,
+		graph->size_x / 2, graph->size_y / 2, 0xFFFFFF, end_msg);
+	if (frame == 25)
+		mlx_loop_end(graph->mlx);
+	frame++;
+}
 
 void	do_pickup(t_graphic *graph, t_player p)
 {
@@ -38,17 +53,17 @@ int	init_graph2(t_graphic *graph)
 	graph->item.img = mlx_xpm_file_to_image(graph->mlx, PITEM,
 			&graph->item.width, &graph->item.height);
 	if (!graph->item.img)
-		return (1);
+		return (ft_ferror("mlx_xpm_file_to_image for item"));
 	graph->ground.img = mlx_xpm_file_to_image(graph->mlx, PGROUND,
 			&graph->ground.width, &graph->ground.height);
 	if (!graph->ground.img)
-		return (1);
+		return (ft_ferror("mlx_xpm_file_to_image for item"));
 	if (init_anim(&graph->anim, graph->mlx))
-		return (1);
+		return (ft_ferror("init_anim"));
 	graph->win = mlx_new_window(graph->mlx, graph->size_x,
 			graph->size_y, "SO_LONG");
 	if (!graph->win)
-		return (1);
+		return (ft_ferror("mlx_new_window"));
 	return (0);
 }
 
@@ -67,7 +82,7 @@ void	put_hud(t_data *data)
 
 void	put_case(t_graphic *graph, t_game *game, int x, int y)
 {
-	if (game->map.map[y][x] == NOTHING)
+	if (game->map.map[y][x] == NOTHING || game->map.map[y][x] == PLAYER)
 		mlx_put_image_to_window(graph->mlx, graph->win,
 			graph->ground.img, x * 35, y * 35);
 	if (game->map.map[y][x] == EXIT)

@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:07:30 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 13:31:46 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/10 10:33:27 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	destroy_tab(t_img *anim, void *mlx, int size)
 
 	i = -1;
 	while (++i < size)
-		mlx_destroy_image(mlx, anim[i].img);
+		if (anim[i].img)
+			mlx_destroy_image(mlx, anim[i].img);
 }
 
 void	destroy_anim(t_anim *a, void *mlx)

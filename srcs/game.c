@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 08:35:06 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 13:23:10 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/10 11:20:00 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	move_player(t_game *game, t_direction drct)
 	ant.x = game->plyr.x;
 	ant.y = game->plyr.y;
 	rollback(drct, &ant.x, &ant.y);
-	game->map.map[ant.y][ant.x] = NOTHING;
 	game->plyr.drctn = drct;
 	if (ret == ITEM)
 		game->items--;

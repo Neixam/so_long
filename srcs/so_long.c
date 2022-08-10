@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 08:31:41 by ambouren          #+#    #+#             */
-/*   Updated: 2022/08/05 14:17:46 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:16:17 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ int	main_loop(void *hand)
 		put_game(data);
 		ft_printf("moves : %d\n", data->game.moves);
 	}
-	if (ret == 1)
-		mlx_loop_end(data->graph.mlx);
 	put_player(&data->graph, data->game.plyr);
-	if (ret == 0)
+	if (ret == 1)
+	{
+		ft_printf("VICTORY !\n");
 		mlx_loop_end(data->graph.mlx);
+	}
 	return (0);
 }
 
